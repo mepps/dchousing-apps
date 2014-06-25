@@ -55,7 +55,7 @@
 </ul>
 </nav>
 
-<%= bootstrap_form_for(applicant, remote: true) do |f| %>
+<%= bootstrap_form_for(applicant) do |f| %>
   <%
     section_names = %w(
       demographic
@@ -69,7 +69,9 @@
       <div id="<%=section_name%>" class="section hide">
         <%= render "main_form/#{section_name}_section", builder: f, applicant: applicant %>
       <hr />
-      <%= f.button("Update", { class:"btn btn-default" }) %>
+      <%= f.button("Update", { class:"btn btn-default"}) %>
+      <hr />
+      <%= f.button("Update and Download Forms", { class: "btn btn-default btn-lg download-forms", name: "download"}) %>
       <hr />
       <%= render("section_buttons",
                  next_section: section_names[index + 1],
@@ -79,9 +81,6 @@
 <% end %>
 <hr />
 
-<div id="download">
-  <%= button_to 'Download forms', "/download", { class:"btn btn-default btn-lg download-forms" } %>
-</div>
 <div id="download-warning" class="modal fade">
   <div class="modal-dialog">
     <div class="modal-content">
